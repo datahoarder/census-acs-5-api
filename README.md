@@ -57,7 +57,7 @@ $ python scripts/compile_acs5_percentages.py
 #  and creates data/compiled/acs5-compiled-percentages.csv
 $ python scripts/wrangle_acs5_deltas.py 
 # reads from data/compiled/acs5-compiled-percentages.csv
-#  and creates data/wrangled/acs-delta-{geo}-{year1}-{year2}.json
+#  and creates data/wrangled/acs-delta-{year1}-{year2}/{geoname}.json
 #  which is a relatively easy-to-use file that any app can deserialize
 ~~~
 

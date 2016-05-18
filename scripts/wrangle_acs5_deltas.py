@@ -1,7 +1,11 @@
 """
 reads from data/compiled/acs5-compiled-percentages.csv
 For each geography, creates:
-    data/wrangled/acs-delta-{geo}-{year1}-{year2}.json
+     data/wrangled/acs-delta-{year1}-{year2}/{geoname}.json
+
+     e.g.
+
+     data/wrangled/acs-delta-2011-2014/county.json
 
 These JSON files are meant to be ready-to-import into an app and contains
 useful calculations, such as the change between each variable from
@@ -22,7 +26,7 @@ PAST_YEAR = 2011
 DATA_DIR = 'data'
 SRC_DATA_DIR = join(DATA_DIR, 'compiled')
 SRC_FILENAME =  join(SRC_DATA_DIR, 'acs5-compiled-percentages.csv')
-DEST_DATA_DIR = join(DATA_DIR, 'wrangled', 'acs5-{0}-{1}'.format(PAST_YEAR, CURRENT_YEAR))
+DEST_DATA_DIR = join(DATA_DIR, 'wrangled', 'acs5-delta-{0}-{1}'.format(PAST_YEAR, CURRENT_YEAR))
 makedirs(DEST_DATA_DIR, exist_ok=True)
 
 
