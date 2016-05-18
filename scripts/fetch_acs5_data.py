@@ -21,7 +21,6 @@ from copy import copy
 from os.path import join, exists
 from os import makedirs
 from urllib.parse import urlencode
-
 DATA_DIR = 'data'
 FETCHED_DATA_DIR = join(DATA_DIR, 'fetched')
 CENSUS_VAR_FILENAME = join(DATA_DIR, 'acs5-var-lookups.csv')

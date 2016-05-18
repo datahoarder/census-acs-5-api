@@ -19,7 +19,7 @@ STAT_HEADERS = {
                         ],
     'adults_25_to_64': ['adults_25_to_64_with_bachelor_degrees_plus'],
 }
-
+CUSTOM_HEADERS = ['non_white_pct']
 TOTALS_HEADERS = list(STAT_HEADERS.keys())
 PCT_HEADERS = []
 for column_list in STAT_HEADERS.values():
@@ -27,7 +27,7 @@ for column_list in STAT_HEADERS.values():
         PCT_HEADERS.append(colname + '_pct')
 
 
-ALL_HEADERS = KEEPER_HEADERS + TOTALS_HEADERS + PCT_HEADERS
+ALL_HEADERS = KEEPER_HEADERS + TOTALS_HEADERS + PCT_HEADERS + CUSTOM_HEADERS
 
 # prepare destination file
 dest_file = open(DEST_FILENAME, 'w')
@@ -52,7 +52,8 @@ for row in datarows:
                 d[pkey + '_pct'] = None
             else:
                 d[pkey + '_pct'] = round(100 * int(pval) / total_val, 1)
-
+    # finally, do some custom tallying
+    d['non_white_pct'] = round(100 - d['white_pct'], 1) if d['white_pct'] else 100
     dest_csv.writerow(d)
 
 
