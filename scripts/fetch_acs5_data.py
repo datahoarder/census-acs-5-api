@@ -16,9 +16,12 @@ http://api.census.gov/data/2014/acs5/examples.html
 
 import csv
 import requests
+import json
 from copy import copy
 from os.path import join, exists
 from os import makedirs
+from urllib.parse import urlencode
+
 DATA_DIR = 'data'
 FETCHED_DATA_DIR = join(DATA_DIR, 'fetched')
 CENSUS_VAR_FILENAME = join(DATA_DIR, 'acs5-var-lookups.csv')
@@ -52,11 +55,25 @@ for geoname in ALL_GEOS:
             print("Already downloaded", dest_fname)
         else:
             print("Downloading", dest_fname)
+            makedirs(dest_dir, exist_ok=True)
 
-        # fname = join()
-        # myparams = copy(DEFAULT_PARAMS)
-        # myparams['for'] = geo + ':*' # e.g. for=county:*
-        # requests.get()
+            ps = copy(DEFAULT_PARAMS)
+            ps['for'] = geoname + ':*' # e.g. for=county:*
+            # have to manually encode the dictionary in order to
+            # prevent special characters from being percent-encoded
+            myparams = urlencode(ps, safe='+,:*')
+            url = ACS_5_ENDPOINT_URL.format(year=year)
+            resp = requests.get(url, params=myparams)
+            if resp.status_code == 200:
+                # just save the data
+                with open(dest_fname, 'w') as wf:
+                    tx = json.loads(resp.text)
+                    jt = json.dumps(tx, indent=2)
+                    wf.write(jt)
+            else:
+                print("Non 200 response:", resp.status_code)
+                print("for url:", resp.url)
+                print(resp.text)
 
 
 

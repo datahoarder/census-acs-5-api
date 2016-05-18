@@ -1,25 +1,25 @@
-name,type,category,description
-B01003_001E,total,people,Total population
-B11011_001E,total,households,Total households
-B11011_002E,count,households,Family households
-B11011_003E,count,households,Married-couple households
-B01001_002E,count,sex,Male
-B01001_026E,count,sex,Female
-B01002_001E,median,age,Median Age
-B23006_001E,count,age,25 to 64
-B03002_002E,count,race,Not Hispanic or Latino
-B03003_003E,count,race,Hispanic or Latino Origin
-B03002_003E,count,race,White
-B03002_004E,count,race,Black
-B03002_005E,count,race,American Indian
-B03002_006E,count,race,Asian
-B03002_007E,count,race,Pacific Islander
-B03002_008E,count,race,Other
-B03002_009E,count,race,Mixed
-B23006_023E,count,education,Bachelor's degree or higher for adults 25 to 64
-B07001_017E,count,mobility,Lived in same house since last year
-B07001_081E,count,mobility,Moved from abroad
-B05002_004E,count,birthplace,Born in another state
-B05001_006E,count,citizenship,Not a citizen
-B06011_001E,median,income,Median income in the past year
-B06012_004E,count,income,At or above 150 percent of the poverty level
+name,slug,type,category,description
+B01003_001E,total_population,total,people,Total population
+B11011_001E,total_households,total,households,Total households
+B11011_002E,family_households,count,households,Family households
+B11011_003E,married_households,count,households,Married-couple households
+B01001_002E,males,count,sex,Male
+B01001_026E,females,count,sex,Female
+B01002_001E,median_age,median,age,Median Age
+B23006_001E,adults_25_to_64,count,age,Adults aged 25 to 64
+B03002_002E,not_hispanic_or_latino,count,race,Not Hispanic or Latino
+B03003_003E,hispanic_or_latino,count,race,Hispanic or Latino Origin
+B03002_003E,white,count,race,White
+B03002_004E,black,count,race,Black
+B03002_005E,american_indian,count,race,American Indian
+B03002_006E,asian,count,race,Asian
+B03002_007E,pacific_islander,count,race,Pacific Islander
+B03002_008E,other_race,count,race,Other
+B03002_009E,mixed_race,count,race,Mixed
+B23006_023E,adults_25_to_64_with_bachelor_degrees_plus,count,education,Bachelor's degree or higher for adults 25 to 64
+B07001_017E,lived_in_same_house,count,mobility,Lived in same house since last year
+B07001_081E,moved_from_abroad,count,mobility,Moved from abroad
+B05001_006E,not_us_citizen,count,citizenship,Not a citizen
+B05002_004E,born_in_other_state,count,birthplace,Born in another state
+B06011_001E,median_icnome,median,income,Median income in the past year
+B06012_004E,gte_150_percent_poverty_level,count,income,At or above 150 percent of the poverty level
