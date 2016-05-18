@@ -16,18 +16,20 @@ from os import makedirs
 import csv
 import json
 
+CURRENT_YEAR = 2014
+PAST_YEAR = 2011
+
 DATA_DIR = 'data'
 SRC_DATA_DIR = join(DATA_DIR, 'compiled')
 SRC_FILENAME =  join(SRC_DATA_DIR, 'acs5-compiled-percentages.csv')
-DEST_DATA_DIR = join(DATA_DIR, 'wrangled')
+DEST_DATA_DIR = join(DATA_DIR, 'wrangled', 'acs5-{0}-{1}'.format(PAST_YEAR, CURRENT_YEAR))
 makedirs(DEST_DATA_DIR, exist_ok=True)
 
 
-ALL_GEOS = ['us', 'state', 'county', 'congressional+district', 'zip+code+tabulation+area']
+ALL_GEOS = ['us', 'state', 'county', 'congressional+district'] # don't do zips for now...they too big, 'zip+code+tabulation+area']
 IGNORE_HEADERS = ['name', 'geo', 'slug', 'year']
 
-CURRENT_YEAR = 2014
-PAST_YEAR = 2011
+
 # open the source data
 print("Reading", SRC_FILENAME)
 with open(SRC_FILENAME, 'r') as rf:
@@ -54,11 +56,10 @@ for r in datarows:
 
 for geoname in ALL_GEOS:
     print("On geoname", geoname)
+    entities = []
     # get a list of all the relevant data rows
     georows = [row for row in datarows if row['geo'] == geoname]
-
     uslugs = set([row['slug'] for row in georows])
-    entities = []
     # get a list of all unique slugs
     for i, slug in enumerate(uslugs):
         if i % 1001 == 0:
@@ -89,14 +90,12 @@ for geoname in ALL_GEOS:
                 dx = cval - pval
                 oh['delta'] = round(dx, 1) if type(dx) is float else dx
                 oh['delta_rate'] = round((100 * dx / cval), 1)
-
-
         entities.append(entity)
 
+
+
     # prepare json file to write to
-    bname = 'acs5-delta-{geo}-{year1}-{year2}.json'.format(geo=geoname,
-                                                           year1=PAST_YEAR, year2=CURRENT_YEAR)
-    dest_fname = join(DEST_DATA_DIR, bname )
+    dest_fname = join(DEST_DATA_DIR, '{0}.json'.format(geoname))
     print("Writing to", dest_fname)
     with open(dest_fname, 'w') as wf:
         obj = OrderedDict()
