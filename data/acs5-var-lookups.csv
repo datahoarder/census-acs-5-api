@@ -1,0 +1,25 @@
+name,type,category,description
+B01003_001E,total,people,Total population
+B11011_001E,total,households,Total households
+B11011_002E,count,households,Family households
+B11011_003E,count,households,Married-couple households
+B01001_002E,count,sex,Male
+B01001_026E,count,sex,Female
+B01002_001E,median,age,Median Age
+B23006_001E,count,age,25 to 64
+B03002_002E,count,race,Not Hispanic or Latino
+B03003_003E,count,race,Hispanic or Latino Origin
+B03002_003E,count,race,White
+B03002_004E,count,race,Black
+B03002_005E,count,race,American Indian
+B03002_006E,count,race,Asian
+B03002_007E,count,race,Pacific Islander
+B03002_008E,count,race,Other
+B03002_009E,count,race,Mixed
+B23006_023E,count,education,Bachelor's degree or higher for adults 25 to 64
+B07001_017E,count,mobility,Lived in same house since last year
+B07001_081E,count,mobility,Moved from abroad
+B05002_004E,count,birthplace,Born in another state
+B05001_006E,count,citizenship,Not a citizen
+B06011_001E,median,income,Median income in the past year
+B06012_004E,count,income,At or above 150 percent of the poverty level
