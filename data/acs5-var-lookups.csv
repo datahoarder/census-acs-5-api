@@ -21,5 +21,6 @@ B07001_017E,lived_in_same_house,count,mobility,Lived in same house since last ye
 B07001_081E,moved_from_abroad,count,mobility,Moved from abroad
 B05001_006E,not_us_citizen,count,citizenship,Not a citizen
 B05002_004E,born_in_other_state,count,birthplace,Born in another state
-B06011_001E,median_income,median,income,Median income in the past year
-B06012_004E,gte_150_percent_poverty_level,count,income,At or above 150 percent of the poverty level
+B06011_001E,median_per_capita_income,median,income,Median per capita income in the past year
+B19013_001E,median_household_income,median,income,Median household income in the past year
+B06012_002E,below_poverty_level,count,income,Below poverty level

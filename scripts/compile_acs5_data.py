@@ -6,9 +6,11 @@ import csv
 import re
 import json
 
-FETCHED_DATA_DIR = join('data', 'fetched')
-WRANGLED_DATA_DIR = join('data', 'wrangled')
-DEST_FILENAME =  join(WRANGLED_DATA_DIR, 'acs5-compiled.csv')
+DATA_DIR = 'data'
+SRC_DATA_DIR = join(DATA_DIR, 'fetched')
+DEST_DATA_DIR = join(DATA_DIR, 'compiled')
+makedirs(DEST_DATA_DIR, exist_ok=True)
+DEST_FILENAME =  join(DEST_DATA_DIR, 'acs5-compiled.csv')
 GEO_NAME_HEADERS = [
     ('us', ['us']),
     ('state', ['state']),
@@ -32,16 +34,17 @@ COMPILED_HEADERS = ['name', 'geo', 'slug', 'year'] + list(VAR_NAMES_TO_SLUGS.val
 
 
 # prepare the csv
+print("Writing to", DEST_FILENAME)
 dest_file = open(DEST_FILENAME, 'w')
 dest_csv = csv.DictWriter(dest_file, fieldnames=COMPILED_HEADERS)
 dest_csv.writeheader()
 
 # let's get all the fetched files together
 for geoname, geoname_columns in GEO_NAME_HEADERS:
-    src_dir = join(FETCHED_DATA_DIR, geoname)
+    src_dir = join(SRC_DATA_DIR, geoname)
     for src_fn in glob(join(src_dir, '*.json')):
         # get the year
-        print(src_fn)
+        print("Extracting from", src_fn)
         with open(src_fn, 'r') as rf:
             data = json.load(rf)
         year = re.search(r'20\d\d', src_fn).group()

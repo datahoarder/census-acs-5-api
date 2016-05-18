@@ -1,12 +1,13 @@
 from os.path import join
-from os import makedirs
 import csv
 
-WRANGLED_DATA_DIR = join('data', 'wrangled')
-SRC_FILENAME =  join(WRANGLED_DATA_DIR, 'acs5-compiled.csv')
-DEST_FILENAME = join(WRANGLED_DATA_DIR, 'acs5-compiled-percentages.csv')
+DATA_DIR = 'data'
+COMPILED_DIR = join(DATA_DIR, 'compiled')
+SRC_FILENAME =  join(COMPILED_DIR, 'acs5-compiled.csv')
+DEST_FILENAME = join(COMPILED_DIR, 'acs5-compiled-percentages.csv')
 
-KEEPER_HEADERS = ['name', 'geo', 'slug', 'year', 'median_age', 'median_income']
+KEEPER_HEADERS = ['name', 'geo', 'slug', 'year',
+                  'median_age', 'median_per_capita_income', 'median_household_income']
 STAT_HEADERS = {
     'total_households': ['family_households', 'married_households'],
     'total_population': ['males', 'females', 'adults_25_to_64',
@@ -15,7 +16,7 @@ STAT_HEADERS = {
                          'pacific_islander', 'other_race', 'mixed_race',
                          'lived_in_same_house', 'moved_from_abroad',
                          'not_us_citizen', 'born_in_other_state',
-                         'gte_150_percent_poverty_level'
+                         'below_poverty_level'
                         ],
     'adults_25_to_64': ['adults_25_to_64_with_bachelor_degrees_plus'],
 }
@@ -30,13 +31,15 @@ for column_list in STAT_HEADERS.values():
 ALL_HEADERS = KEEPER_HEADERS + TOTALS_HEADERS + PCT_HEADERS + CUSTOM_HEADERS
 
 # prepare destination file
+print("Writing to", DEST_FILENAME)
 dest_file = open(DEST_FILENAME, 'w')
 dest_csv = csv.DictWriter(dest_file, fieldnames=ALL_HEADERS)
 dest_csv.writeheader()
 
 
-
+# open the source data
 with open(SRC_FILENAME, 'r') as rf:
+    print("Extracting from", SRC_FILENAME)
     datarows = list(csv.DictReader(rf))
 
 for row in datarows:
